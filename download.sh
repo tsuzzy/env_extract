@@ -1,7 +1,7 @@
 #!/bin/bash
 init_date=`printf "$1""0""$2""01"` # pass command line arguments
 startdate=$( gdate -d "$init_date" +'%Y%m01' )
-enddate=$( gdate -d "$startdate +1 month - 1 day" +'%Y%m%d' )
+enddate=$( gdate -d "$startdate +1 month" +'%Y%m%d' )
 
 thedate=$startdate
 
