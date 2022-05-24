@@ -1,10 +1,9 @@
 #!/bin/bash
+init_date=`printf "$1""0""$2""01"` # pass command line arguments
+startdate=$( gdate -d "$init_date" +'%Y%m01' )
+enddate=$( gdate -d "$startdate +1 month - 1 day" +'%Y%m%d' )
 
-startdate='2019-01-01' # specify the date you want to start and end for the files
-enddate='2019-02-28'
-
-enddate=$( gdate -d "$enddate + 1 day" +%Y%m%d )
-thedate=$( gdate -d "$startdate" +%Y%m%d )
+thedate=$startdate
 
 while [ "$thedate" != "$enddate" ]; do
   themonth=$( gdate -d "$thedate" +%Y%m )
