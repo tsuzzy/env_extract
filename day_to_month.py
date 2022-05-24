@@ -28,19 +28,19 @@ def merge_data(year, month):
             host['sst_'+str(day)] = host.merge(df, how='left', on=['lat','lon'])['sst'].values
         print(f'Processing day {day} out of {max_day} days...')
     
+    calculate_min_max_mean(host, max_day)
+    
     return host
 
-def calculate_min_max_mean(df):
-    df['min'] = df.iloc[:, 2:14].min(axis=1)
-    df['max'] = df.iloc[:, 2:14].max(axis=1)
-    df['mean'] = df.iloc[:, 2:14].mean(axis=1)
+def calculate_min_max_mean(df, last_day):
+    df['min'] = df.iloc[:, 2:last_day+2].min(axis=1)
+    df['max'] = df.iloc[:, 2:last_day+2].max(axis=1)
+    df['mean'] = df.iloc[:, 2:last_day+2].mean(axis=1)
 
-    return df
 
 if __name__ == "__main__":
-    merged_df = merge_data(sys.argv[1], sys.argv[2])
-    month_data = calculate_min_max_mean(merged_df)
-    month_data.to_csv(f'./temp_data/SST{sys.argv[1]}{sys.argv[2].zfill(2)}.csv', index=False)
+    df = merge_data(sys.argv[1], sys.argv[2])
+    df.to_csv(f'./temp_data/SST{sys.argv[1]}{sys.argv[2].zfill(2)}.csv', index=False)
 
 
 '''(Done) To-do: find ways to manipulate multiple nc datasets'''
