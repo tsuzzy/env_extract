@@ -21,7 +21,7 @@ def merge_data(year):
     solar_month = [1,3,5,7,8,10,12]
     lunar_month = [4,6,9,11]
 
-    for month in range(6,13):
+    for month in range(1,13):
         if month in solar_month:
             max_day = 31
         elif month in lunar_month:
